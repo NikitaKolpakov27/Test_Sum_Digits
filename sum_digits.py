@@ -1,6 +1,23 @@
 # Получаем сумму цифр в строке
 def get_sum_digit(str_num):
-    return sum(int(i) for i in str_num if i.isdigit())
+
+    digit_sum = 0
+    for i in str_num:
+
+        # В случае с отрицательным числом, следующую цифру не рассматриваем
+        # (т.к. она уже была задействована в начале цикла)
+        if str_num[0] == '-' and i == str_num[1]:
+            continue
+
+        # Обрабатываем ситуацию с отрицательным числом
+        if i == '-':
+            neg_num = int(i + str_num[1])
+            digit_sum += neg_num
+            continue
+
+        digit_sum += int(i)
+
+    return digit_sum
 
 # Получаем ключ соответствующий наибольшому значению суммы цифр
 def get_max_sum_number(mapa):
@@ -9,7 +26,7 @@ def get_max_sum_number(mapa):
             return i[0]
 
 
-if __name__ == "__main__":
+def main_func():
     mapa = {}
 
     while True:
@@ -29,4 +46,8 @@ if __name__ == "__main__":
 
     # Выводим в консоль число с максимальной суммой цифр в нем
     print("Ответ:", get_max_sum_number(mapa))
-    final_click = input("Нажмите Enter, чтобы выйти")
+    return get_max_sum_number(mapa)
+
+
+if __name__ == "__main__":
+    main_func()
